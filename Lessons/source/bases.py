@@ -47,14 +47,14 @@ def decode(digits, base):
     # TODO: Decode digits from any base (2 up to 36)
     # ...
     digits = digits.lower()
-    max_digits = string.digits + string.ascii_lowercase
-    base_digits = max_digits[:base]
+    max_digits = string.digits + string.ascii_lowercase           # support up to base 36
+    base_digits = max_digits[:base]                               # digits to support given base
 
     result_arr = []
     power = 0
 
     for char in reversed(digits):
-        number = base_digits.index(char) * (base ** power)
+        number = base_digits.index(char) * (base ** power)        # convert each digit to base 10 number
         result_arr.append(number)
         power += 1
 
@@ -78,31 +78,30 @@ def encode(number, base):
     # ...
     # TODO: Encode number in any base (2 up to 36)
     # ...
-    max_digits = string.digits + string.ascii_lowercase
-    base_digits = max_digits[:base]
+    max_digits = string.digits + string.ascii_lowercase         # support up to base 36
+    base_digits = max_digits[:base]                             # digits to support given base
     result = ""
 
-    if number == base:
+    if number == base:                                          #
         result = '10'
         return result
 
-    if number < base:
+    if number < base:                                           #
         remainder = number % base
         result = base_digits[int(remainder)] + result
         return result
 
-    while number > base:
+    while number > base:                                        #
         remainder = number % base
         result = base_digits[int(remainder)] + result
-        number = number / base
+        number = math.floor(number / base)
 
-    if number == base:
+    if number == base:                                          #
         result = '10' + result
         return result
 
     remainder = number % base
     result = base_digits[int(remainder)] + result
-
 
     print("RESULT => {}".format(result))
     return result
