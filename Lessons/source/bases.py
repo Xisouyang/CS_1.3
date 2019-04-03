@@ -40,7 +40,6 @@ def decode(digits, base):
     #
     #     return result
 
-
     # ...
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
@@ -50,16 +49,16 @@ def decode(digits, base):
     max_digits = string.digits + string.ascii_lowercase           # support up to base 36
     base_digits = max_digits[:base]                               # digits to support given base
 
-    result_arr = []
+    result = 0
     power = 0
 
     for char in reversed(digits):
         number = base_digits.index(char) * (base ** power)        # convert each digit to base 10 number
-        result_arr.append(number)
+        result += number
         power += 1
 
-    result = sum(result_arr)
-    print("RESULT => {}".format(result))
+    # result = sum(result_arr)
+    print("ENCODED RESULT => {}".format(result))
     return result
 
 
@@ -82,28 +81,12 @@ def encode(number, base):
     base_digits = max_digits[:base]                             # digits to support given base
     result = ""
 
-    if number == base:                                          #
-        result = '10'
-        return result
-
-    if number < base:                                           #
-        remainder = number % base
-        result = base_digits[int(remainder)] + result
-        return result
-
-    while number > base:                                        #
+    while number > 0:                                        
         remainder = number % base
         result = base_digits[int(remainder)] + result
         number = math.floor(number / base)
 
-    if number == base:                                          #
-        result = '10' + result
-        return result
-
-    remainder = number % base
-    result = base_digits[int(remainder)] + result
-
-    print("RESULT => {}".format(result))
+    print("ENCODED RESULT => {}".format(result))
     return result
 
 
