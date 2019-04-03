@@ -46,15 +46,15 @@ def decode(digits, base):
     # ...
     # TODO: Decode digits from any base (2 up to 36)
     # ...
-
-    digits = digits.lower()                 
-    hex_digits = string.hexdigits[:base]
+    digits = digits.lower()
+    max_digits = string.digits + string.ascii_lowercase
+    base_digits = max_digits[:base]
 
     result_arr = []
     power = 0
 
     for char in reversed(digits):
-        number = hex_digits.index(char) * (base ** power)
+        number = base_digits.index(char) * (base ** power)
         result_arr.append(number)
         power += 1
 
@@ -78,8 +78,34 @@ def encode(number, base):
     # ...
     # TODO: Encode number in any base (2 up to 36)
     # ...
+    max_digits = string.digits + string.ascii_lowercase
+    base_digits = max_digits[:base]
+    result = ""
+
+    if number == base:
+        result = '10'
+        return result
+
+    if number < base:   
+        remainder = number % base
+        result = base_digits[int(remainder)] + result
+        return result
+
+    while number > base:
+        remainder = number % base
+        result = base_digits[int(remainder)] + result
+        number = number / base
+
+    if number == base:
+        result = '10' + result
+        return result
+
+    remainder = number % base
+    result = base_digits[int(remainder)] + result
 
 
+    print("RESULT => {}".format(result))
+    return result
 
 
 def convert(digits, base1, base2):
@@ -91,6 +117,8 @@ def convert(digits, base1, base2):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
+    # decode(digits, base1)
+    encode(16, 16)
     # TODO: Convert digits from base 2 to base 16 (and vice versa)
     # ...
     # TODO: Convert digits from base 2 to base 10 (and vice versa)
