@@ -18,18 +18,17 @@ def linear_search_iterative(array, item):
 
 def linear_search_recursive(array, item, index=0):
     # TODO: implement linear search recursively here
-    if len(array) == 0:
-        return None
-    else:
+
+    # check if index is within array length
+    if index <= len(array) - 1:
+        # if we find the number
         if array[index] == item:
             return index
         else:
-            if index < len(array) - 1:
-                index += 1
-                return linear_search_recursive(array, item, index)
-            else:
-                return None
-    # pass
+            return linear_search_recursive(array, item, index + 1)
+    return None
+
+
     # once implemented, change linear_search to call linear_search_recursive
     # to verify that your recursive implementation passes all tests
 
@@ -44,35 +43,22 @@ def binary_search(array, item):
 
 def binary_search_iterative(array, item):
     # TODO: implement binary search iteratively here
-    if len(array) == 0:
-        return None
 
-    isFound = False
     left = 0
     right = len(array) - 1
-    result = None
 
-    while isFound == False:
-
-        if left == right:
-            if array[left] == item:
-                result = left
-                isFound = True
-                continue
-            return None
+    while left <= right:
 
         middle_index = (left + right) // 2
         middle_value = array[middle_index]
 
-        if middle_value == item:
-            result = middle_index
-            isFound = True
-        elif middle_value > item:
+        if item == middle_value:
+            return middle_index
+        elif item < middle_value:
             right = middle_index - 1
-        elif middle_value < item:
+        elif item > middle_value:
             left = middle_index + 1
-
-    return result
+    return None
 
     # once implemented, change binary_search to call binary_search_iterative
     # to verify that your iterative implementation passes all tests
@@ -92,9 +78,8 @@ def binary_search_recursive(array, item, left=None, right=None):
         left = 0
         right = len(array) - 1
 
-    if left == right:
-        if array[left] == item:
-            return left
+    # we've searched through everything
+    if left > right:
         return None
 
     # check middle of the array

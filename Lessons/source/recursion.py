@@ -16,7 +16,7 @@ def factorial(n):
 def factorial_iterative(n):
     # TODO: implement the factorial function iteratively here
     result = 1
-    while n > 0:
+    while n > 1:
         result *= n
         n -= 1
     return result
