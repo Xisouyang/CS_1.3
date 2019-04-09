@@ -103,7 +103,5 @@ def binary_search_recursive(array, item, left=None, right=None):
 
     return binary_search_recursive(array, item, left, right)
 
-
-    # pass
     # once implemented, change binary_search to call binary_search_recursive
     # to verify that your recursive implementation passes all tests
