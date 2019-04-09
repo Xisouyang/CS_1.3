@@ -20,9 +20,29 @@ def is_palindrome(text):
 def is_palindrome_iterative(text):
     # TODO: implement the is_palindrome function iteratively here
 
-    text = ''.join(char for char in text if char.isalnum())
-    text = text.lower()
-    return text == text[::-1]
+    # CHEAT
+    # text = ''.join(char for char in text if char.isalnum())
+    # text = text.lower()
+    # return text == text[::-1]
+
+    left = 0
+    right = len(text) - 1
+
+    while left <= right:
+        while text[left] not in LETTERS:
+            left += 1
+        while text[right] not in LETTERS:
+            right -= 1
+
+        if text[left] != text[right]:
+            if text[left].lower() == text[right].lower():
+                return True
+            return False
+
+        left += 1
+        right -= 1
+
+    return True
 
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
