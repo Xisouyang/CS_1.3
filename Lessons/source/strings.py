@@ -18,6 +18,9 @@ def contains(text, pattern):
             return True
         sub_string = ''
     return False
+    # if pattern in text:
+    #     return True
+    # return False
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
@@ -25,6 +28,20 @@ def find_index(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_index here (iteratively and/or recursively)
+    is_pattern = False
+
+    if pattern == '' or pattern == text:
+        return 0
+
+    for i in range(len(text) - len(pattern) + 1):
+        is_pattern = True
+        if text[i] == pattern[0]:
+            for j in range(len(pattern)):
+                if text[i + j] != pattern[j]:
+                    is_pattern = False
+            if is_pattern:
+                return i
+    return None                        
 
 
 def find_all_indexes(text, pattern):
