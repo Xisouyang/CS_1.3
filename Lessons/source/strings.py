@@ -30,7 +30,7 @@ def find_index(text, pattern):
     # TODO: Implement find_index here (iteratively and/or recursively)
     is_pattern = False
 
-    if pattern == '' or pattern == text:
+    if pattern == '':
         return 0
 
     for i in range(len(text) - len(pattern) + 1):
@@ -41,7 +41,7 @@ def find_index(text, pattern):
                     is_pattern = False
             if is_pattern:
                 return i
-    return None                        
+    return None
 
 
 def find_all_indexes(text, pattern):
@@ -49,6 +49,25 @@ def find_all_indexes(text, pattern):
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+
+    is_pattern = False
+    list_of_indices = []
+
+    if pattern == '':
+        for i in range(len(text)):
+            list_of_indices.append(i)
+        return list_of_indices
+
+    for i in range(len(text) - len(pattern) + 1):
+        is_pattern = True
+        if text[i] == pattern[0]:
+            for j in range(len(pattern)):
+                if text[i + j] != pattern[j]:
+                    is_pattern = False
+            if is_pattern:
+                list_of_indices.append(i)
+    return list_of_indices
+
     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
 
 
