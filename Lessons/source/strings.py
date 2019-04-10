@@ -17,9 +17,6 @@ def contains(text, pattern):
             return True                             # pattern exists
         sub_string = ''                             # reset substring if not found
     return False                                    # pattern does not exist
-    # if pattern in text:
-    #     return True
-    # return False
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,

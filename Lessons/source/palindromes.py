@@ -5,7 +5,7 @@ import string
 # string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
-LETTERS = frozenset(string.ascii_letters)
+LETTERS = frozenset(string.ascii_letters) # dictionary without values
 
 def is_palindrome(text):
     """A string of characters is a palindrome if it reads the same forwards and
@@ -25,24 +25,24 @@ def is_palindrome_iterative(text):
     # text = text.lower()
     # return text == text[::-1]
 
-    left = 0
-    right = len(text) - 1
+    left = 0                                                # track left index
+    right = len(text) - 1                                   # track right index
 
-    while left <= right:
-        while text[left] not in LETTERS:
+    while left <= right:                                    # go through both sides of text
+        while text[left] not in LETTERS:                    # ignore special characters
             left += 1
         while text[right] not in LETTERS:
             right -= 1
 
-        if text[left] != text[right]:
-            if text[left].lower() == text[right].lower():
-                return True
-            return False
+        if text[left] != text[right]:                       # if characters don't match
+            if text[left].lower() != text[right].lower():   # make both characters lowercase and check again
+                return False                                # lowercase characters don't match
+            return False                                    # text doesn't match
 
         left += 1
         right -= 1
 
-    return True
+    return True                                             # is palindrome
 
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
