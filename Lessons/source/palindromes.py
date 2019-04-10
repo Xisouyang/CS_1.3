@@ -34,10 +34,9 @@ def is_palindrome_iterative(text):
         while text[right] not in LETTERS:
             right -= 1
 
-        if text[left] != text[right]:                       # if characters don't match
-            if text[left].lower() != text[right].lower():   # make both characters lowercase and check again
-                return False                                # lowercase characters don't match
-            return False                                    # text doesn't match
+                                                            # if characters don't match
+        if text[left].lower() != text[right].lower():       # make both characters lowercase and check again
+            return False                                    # lowercase characters don't match
 
         left += 1
         right -= 1
@@ -47,47 +46,35 @@ def is_palindrome_iterative(text):
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
 
-
 def is_palindrome_recursive(text, left=None, right=None):
     # TODO: implement the is_palindrome function recursively here
 
-    # if left == None:
-    #     text = ''.join(char for char in text if char.isalnum())
-    #     text = text.lower()
-    #     left = 0
-    #     right = len(text) - 1
-    #
-    # if left > right:
-    #     return True
-    #
-    # if text[left] != text[right]:
-    #     return False
-    #
-    # return is_palindrome_recursive(text, left + 1, right - 1)
-
+    # left and right bound for text
     if left == None:
         left = 0
         right = len(text) - 1
 
-    if left > right:
+    # finished iterating through text
+    if left >= right:
         return True
 
+    # skip over any special characters
     if text[left] not in LETTERS:
         return is_palindrome_recursive(text, left + 1, right)
     if text[right] not in LETTERS:
         return is_palindrome_recursive(text, left, right - 1)
 
+    # found non matching characters
     if text[left] != text[right]:
-        if text[left].lower() == text[right].lower():
-            return True
-        return False
+        # capitalization case
+        if text[left].lower() != text[right].lower():
+            return False
 
     return is_palindrome_recursive(text, left + 1, right - 1)
 
 
     # once implemented, change is_palindrome to call is_palindrome_recursive
     # to verify that your iterative implementation passes all tests
-
 
 def main():
     import sys
