@@ -50,17 +50,17 @@ def find_all_indexes(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
-    is_pattern = False
-    list_of_indices = []
+    is_pattern = False                              # flag to determine if pattern found
+    list_of_indices = []                            # list to hold indices
 
-    if pattern == '':
-        for i in range(len(text)):
+    if pattern == '':                               # all strings have empty substrings
+        for i in range(len(text)):                  # add all characters in text to list
             list_of_indices.append(i)
         return list_of_indices
 
-    for i in range(len(text) - len(pattern) + 1):
-        is_pattern = True
-        if text[i] == pattern[0]:
+    for i in range(len(text) - len(pattern) + 1):   # same comments as find_index function,
+        is_pattern = True                           # except instead of returning index,
+        if text[i] == pattern[0]:                   # we add index to a list that we return at the end
             for j in range(len(pattern)):
                 if text[i + j] != pattern[j]:
                     is_pattern = False
