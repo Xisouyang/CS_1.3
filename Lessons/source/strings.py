@@ -10,7 +10,7 @@ def contains(text, pattern):
         return True
 
     sub_string = ''
-    for i in range(len(text) - len(pattern) + 1):   # Iterate through text
+    for i in range(len(text) - len(pattern) + 1):   # Iterate through text with limit based on length of pattern
         for j in range(i, len(pattern) + i):        # Iterate through as many characters as pattern has
             sub_string += text[j]                   # add characters to substring
         if pattern == sub_string:                   # compare
@@ -27,20 +27,21 @@ def find_index(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_index here (iteratively and/or recursively)
-    is_pattern = False
 
-    if pattern == '':
+    is_pattern = False                              # flag to determine if pattern found in text
+
+    if pattern == '':                               # all strings have empty string pattern
         return 0
 
-    for i in range(len(text) - len(pattern) + 1):
-        is_pattern = True
-        if text[i] == pattern[0]:
-            for j in range(len(pattern)):
-                if text[i + j] != pattern[j]:
-                    is_pattern = False
-            if is_pattern:
+    for i in range(len(text) - len(pattern) + 1):   # Iterate through text with limit based on length of pattern
+        is_pattern = True                           # reset flag to True
+        if text[i] == pattern[0]:                   # if we find first character in pattern
+            for j in range(len(pattern)):           # check the next few characters up to length of pattern
+                if text[i + j] != pattern[j]:       # if any of next few characters don't match
+                    is_pattern = False              # pattern doesn't exist
+            if is_pattern:                          # pattern exists
                 return i
-    return None
+    return None                                     # pattern not found
 
 
 def find_all_indexes(text, pattern):
