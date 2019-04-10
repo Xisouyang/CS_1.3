@@ -6,18 +6,17 @@ def contains(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
 
-    if pattern == '':
+    if pattern == '':                               # All strings have an empty string
         return True
 
     sub_string = ''
-    for i in range(len(text) - len(pattern) + 1):
-        for j in range(i, len(pattern) + i):
-            sub_string += text[j]
-        print(pattern, sub_string)
-        if pattern == sub_string:
-            return True
-        sub_string = ''
-    return False
+    for i in range(len(text) - len(pattern) + 1):   # Iterate through text
+        for j in range(i, len(pattern) + i):        # Iterate through as many characters as pattern has
+            sub_string += text[j]                   # add characters to substring
+        if pattern == sub_string:                   # compare
+            return True                             # pattern exists
+        sub_string = ''                             # reset substring if not found
+    return False                                    # pattern does not exist
     # if pattern in text:
     #     return True
     # return False
