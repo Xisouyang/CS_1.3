@@ -5,6 +5,7 @@ import string
 # string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
+LETTERS = frozenset(string.ascii_letters)
 
 def is_palindrome(text):
     """A string of characters is a palindrome if it reads the same forwards and
@@ -64,6 +65,24 @@ def is_palindrome_recursive(text, left=None, right=None):
     #
     # return is_palindrome_recursive(text, left + 1, right - 1)
 
+    if left == None:
+        left = 0
+        right = len(text) - 1
+
+    if left > right:
+        return True
+
+    if text[left] not in LETTERS:
+        return is_palindrome_recursive(text, left + 1, right)
+    if text[right] not in LETTERS:
+        return is_palindrome_recursive(text, left, right - 1)
+
+    if text[left] != text[right]:
+        if text[left].lower() == text[right].lower():
+            return True
+        return False
+
+    return is_palindrome_recursive(text, left + 1, right - 1)
 
 
     # once implemented, change is_palindrome to call is_palindrome_recursive
