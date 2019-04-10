@@ -24,6 +24,8 @@ class TestPalindromes(unittest.TestCase):
         assert is_palindrome('NoOn') is True
         assert is_palindrome('Radar') is True
         assert is_palindrome('DogGod') is True
+        assert is_palindrome('DOgGod') is True
+        assert is_palindrome('DOgbOd') is False
         assert is_palindrome('RaceCar') is True
 
     def test_is_palindrome_with_whitespace(self):
