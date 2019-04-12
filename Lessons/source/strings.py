@@ -1,22 +1,75 @@
 #!python
 
+def pattern_empty(text, index_list, which):
+    if which == 'contains':
+        return True
+    elif which == 'find_index':
+        return 0
+    elif which == 'find_all_indexes':
+        for i in range(len(text)):
+            index_list.append(i)
+        return index_list
+
+def pattern_true(index, which):
+    if which == 'contains':
+        return True
+    elif which == 'find_index':
+        return index
+
+def pattern_false(which):
+    if which == 'contains':
+        return False
+    elif which == 'find_index':
+        return None
+
+
+def string_master_func(text, pattern, which):
+
+    index_list = []
+    sub_string = ''
+
+    if pattern == '':
+        return pattern_empty(text, index_list, which)
+
+
+    for i in range(len(text) - len(pattern) + 1):   # Iterate through text with limit based on length of pattern
+        for j in range(i, len(pattern) + i):        # Iterate through as many characters as pattern has
+            sub_string += text[j]                   # add characters to substring
+        if pattern == sub_string:                   # compare
+
+            if which == 'find_all_indexes':
+                index_list.append(i)
+            else:
+                return pattern_true(i, which)
+
+        sub_string = ''                             # reset substring if not found
+
+    if which == 'find_all_indexes':
+        return index_list
+    else:
+        return pattern_false(which)
+
 def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
 
-    if pattern == '':                               # All strings have an empty string
-        return True
+    which = 'contains'
 
-    sub_string = ''
-    for i in range(len(text) - len(pattern) + 1):   # Iterate through text with limit based on length of pattern
-        for j in range(i, len(pattern) + i):        # Iterate through as many characters as pattern has
-            sub_string += text[j]                   # add characters to substring
-        if pattern == sub_string:                   # compare
-            return True                             # pattern exists
-        sub_string = ''                             # reset substring if not found
-    return False                                    # pattern does not exist
+    # if pattern == '':                               # All strings have an empty string
+    #     return True
+    #
+    # sub_string = ''
+    # for i in range(len(text) - len(pattern) + 1):   # Iterate through text with limit based on length of pattern
+    #     for j in range(i, len(pattern) + i):        # Iterate through as many characters as pattern has
+    #         sub_string += text[j]                   # add characters to substring
+    #     if pattern == sub_string:                   # compare
+    #         return True                             # pattern exists
+    #     sub_string = ''                             # reset substring if not found
+    # return False                                    # pattern does not exist
+
+    return string_master_func(text, pattern, which)
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
@@ -24,6 +77,8 @@ def find_index(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_index here (iteratively and/or recursively)
+
+    which = 'find_index'
 
     # is_pattern = False                              # flag to determine if pattern found in text
     #
@@ -40,23 +95,27 @@ def find_index(text, pattern):
     #             return i
     # return None                                     # pattern not found
 
-    if pattern == '':                                 # All strings have an empty string
-        return 0
+    # if pattern == '':                                 # All strings have an empty string
+    #     return 0
+    #
+    # sub_string = ''
+    # for i in range(len(text) - len(pattern) + 1):   # Iterate through text with limit based on length of pattern
+    #     for j in range(i, len(pattern) + i):        # Iterate through as many characters as pattern has
+    #         sub_string += text[j]                   # add characters to substring
+    #     if pattern == sub_string:                   # compare
+    #         return i                                # pattern exists
+    #     sub_string = ''                             # reset substring if not found
+    # return None                                     # pattern does not exist
 
-    sub_string = ''
-    for i in range(len(text) - len(pattern) + 1):   # Iterate through text with limit based on length of pattern
-        for j in range(i, len(pattern) + i):        # Iterate through as many characters as pattern has
-            sub_string += text[j]                   # add characters to substring
-        if pattern == sub_string:                   # compare
-            return i                                # pattern exists
-        sub_string = ''                             # reset substring if not found
-    return None                                     # pattern does not exist
+    return string_master_func(text, pattern, which)
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+
+    which = 'find_all_indexes'
 
     # is_pattern = False                              # flag to determine if pattern found
     # list_of_indices = []                            # list to hold indices
@@ -76,21 +135,23 @@ def find_all_indexes(text, pattern):
     #             list_of_indices.append(i)
     # return list_of_indices
 
-    sub_string = ''
-    list_of_indices = []
+    # sub_string = ''
+    # list_of_indices = []
+    #
+    # if pattern == '':                               # all strings have empty substrings
+    #     for i in range(len(text)):                  # add all characters in text to list
+    #         list_of_indices.append(i)
+    #     return list_of_indices
+    #
+    # for i in range(len(text) - len(pattern) + 1):   # Iterate through text with limit based on length of pattern
+    #     for j in range(i, len(pattern) + i):        # Iterate through as many characters as pattern has
+    #         sub_string += text[j]                   # add characters to substring
+    #     if pattern == sub_string:                   # compare
+    #         list_of_indices.append(i)               # pattern exists
+    #     sub_string = ''                             # reset substring if not found
+    # return list_of_indices                          # pattern does not exist
 
-    if pattern == '':                               # all strings have empty substrings
-        for i in range(len(text)):                  # add all characters in text to list
-            list_of_indices.append(i)
-        return list_of_indices
-
-    for i in range(len(text) - len(pattern) + 1):   # Iterate through text with limit based on length of pattern
-        for j in range(i, len(pattern) + i):        # Iterate through as many characters as pattern has
-            sub_string += text[j]                   # add characters to substring
-        if pattern == sub_string:                   # compare
-            list_of_indices.append(i)               # pattern exists
-        sub_string = ''                             # reset substring if not found
-    return list_of_indices                          # pattern does not exist
+    return string_master_func(text, pattern, which)
 
 
     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
