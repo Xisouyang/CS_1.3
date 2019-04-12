@@ -25,21 +25,32 @@ def find_index(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_index here (iteratively and/or recursively)
 
-    is_pattern = False                              # flag to determine if pattern found in text
+    # is_pattern = False                              # flag to determine if pattern found in text
+    #
+    # if pattern == '':                               # all strings have empty string pattern
+    #     return 0
+    #
+    # for i in range(len(text) - len(pattern) + 1):   # Iterate through text with limit based on length of pattern
+    #     is_pattern = True                           # reset flag to True
+    #     if text[i] == pattern[0]:                   # if we find first character in pattern
+    #         for j in range(len(pattern)):           # check the next few characters up to length of pattern
+    #             if text[i + j] != pattern[j]:       # if any of next few characters don't match
+    #                 is_pattern = False              # pattern doesn't exist
+    #         if is_pattern:                          # pattern exists
+    #             return i
+    # return None                                     # pattern not found
 
-    if pattern == '':                               # all strings have empty string pattern
+    if pattern == '':                                 # All strings have an empty string
         return 0
 
+    sub_string = ''
     for i in range(len(text) - len(pattern) + 1):   # Iterate through text with limit based on length of pattern
-        is_pattern = True                           # reset flag to True
-        if text[i] == pattern[0]:                   # if we find first character in pattern
-            for j in range(len(pattern)):           # check the next few characters up to length of pattern
-                if text[i + j] != pattern[j]:       # if any of next few characters don't match
-                    is_pattern = False              # pattern doesn't exist
-            if is_pattern:                          # pattern exists
-                return i
-    return None                                     # pattern not found
-
+        for j in range(i, len(pattern) + i):        # Iterate through as many characters as pattern has
+            sub_string += text[j]                   # add characters to substring
+        if pattern == sub_string:                   # compare
+            return i                                # pattern exists
+        sub_string = ''                             # reset substring if not found
+    return None                                     # pattern does not exist
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
@@ -47,23 +58,40 @@ def find_all_indexes(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
-    is_pattern = False                              # flag to determine if pattern found
-    list_of_indices = []                            # list to hold indices
+    # is_pattern = False                              # flag to determine if pattern found
+    # list_of_indices = []                            # list to hold indices
+    #
+    # if pattern == '':                               # all strings have empty substrings
+    #     for i in range(len(text)):                  # add all characters in text to list
+    #         list_of_indices.append(i)
+    #     return list_of_indices
+    #
+    # for i in range(len(text) - len(pattern) + 1):   # same comments as find_index function,
+    #     is_pattern = True                           # except instead of returning index,
+    #     if text[i] == pattern[0]:                   # we add index to a list that we return at the end
+    #         for j in range(len(pattern)):
+    #             if text[i + j] != pattern[j]:
+    #                 is_pattern = False
+    #         if is_pattern:
+    #             list_of_indices.append(i)
+    # return list_of_indices
+
+    sub_string = ''
+    list_of_indices = []
 
     if pattern == '':                               # all strings have empty substrings
         for i in range(len(text)):                  # add all characters in text to list
             list_of_indices.append(i)
         return list_of_indices
 
-    for i in range(len(text) - len(pattern) + 1):   # same comments as find_index function,
-        is_pattern = True                           # except instead of returning index,
-        if text[i] == pattern[0]:                   # we add index to a list that we return at the end
-            for j in range(len(pattern)):
-                if text[i + j] != pattern[j]:
-                    is_pattern = False
-            if is_pattern:
-                list_of_indices.append(i)
-    return list_of_indices
+    for i in range(len(text) - len(pattern) + 1):   # Iterate through text with limit based on length of pattern
+        for j in range(i, len(pattern) + i):        # Iterate through as many characters as pattern has
+            sub_string += text[j]                   # add characters to substring
+        if pattern == sub_string:                   # compare
+            list_of_indices.append(i)               # pattern exists
+        sub_string = ''                             # reset substring if not found
+    return list_of_indices                          # pattern does not exist
+
 
     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
 
