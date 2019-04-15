@@ -36,7 +36,9 @@ class LinkedList(object):
     def items(self):
         """Return a list of all items in this linked list.
         Best and worst case running time: Theta(n) for n items in the list
-        because we always need to loop through all n nodes."""
+        because we always need to loop through all n nodes.
+        Best and worst case space complexity: O(l) - l is length of list
+        """
         # Create an empty list of results
         result = []  # Constant time to create a new list
         # Start at the head node
@@ -56,7 +58,8 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case runtime: O(1) - constant time to return property
+        """
         # # Node counter initialized to zero
         # node_count = 0
         # # Start at the head node
@@ -184,7 +187,7 @@ class LinkedList(object):
         """
         # TODO: Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
-        
+
         node = self.head                # start at front of list [O(1)]
         while node != None:             # traverse thru list [O(l) - l is length of list]
             if node.data == old_item:   # did we find item we wanna replace? [O(1)]
