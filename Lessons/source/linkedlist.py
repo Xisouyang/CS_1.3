@@ -280,6 +280,25 @@ def test_linked_list():
     print('size: {}'.format(ll.size))
     print('length: {}'.format(ll.length()))
 
+    ll.insert_at_index(0, 'A')
+    print('head: {}'.format(ll.head))
+    print('tail: {}'.format(ll.tail))
+    print('size: {}'.format(ll.size))
+    print('length: {}'.format(ll.length()))
+
+    ll.insert_at_index(1, 'B')
+    print('head: {}'.format(ll.head))
+    print('tail: {}'.format(ll.tail))
+    print('size: {}'.format(ll.size))
+    print('length: {}'.format(ll.length()))
+    print(ll)
+
+    ll.replace('A', 'D')
+    print('head: {}'.format(ll.head))
+    print('tail: {}'.format(ll.tail))
+    print('size: {}'.format(ll.size))
+    print('length: {}'.format(ll.length()))
+    print(ll)
 
 if __name__ == '__main__':
     test_linked_list()
