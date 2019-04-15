@@ -110,7 +110,7 @@ class LinkedList(object):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node before the given index and insert item after it
 
-        if self.is_empty():                         # if no items in linked list
+        if self.is_empty() or index == self.size:   # if no items in linked list
             self.append(item)                       # append [O(1)]
         elif not self.is_empty() and index == 0:    # if items exist, and we want to add item to front
             self.prepend(item)                      # add item to front [O(1)]
@@ -122,8 +122,6 @@ class LinkedList(object):
                 index -= 1                          # keep track of where we are [O(1)]
             new_node.next = node.next               # set pointer of new node so chain isn't broken thru insert [O(1)]
             node.next = new_node                    # insert our new node [O(1)]
-            if new_node.next == None:               # if our node is at the end
-                self.tail = new_node                # update our tail [O(1)]
             self.size += 1                          # update list length [O(1)]
 
     def append(self, item):
@@ -177,6 +175,10 @@ class LinkedList(object):
             node = node.next  # Constant time to reassign a variable
         # We never found data satisfying quality, but have to return something
         return None  # Constant time to return None
+
+    def reverse(self):
+        """Reverse all the items in our linked list"""
+        pass    
 
     def replace(self, old_item, new_item):
         """Replace the given old_item in this linked list with given new_item
@@ -245,7 +247,6 @@ class LinkedList(object):
         else:
             # Otherwise raise an error to tell the user that delete has failed
             raise ValueError('Item not found: {}'.format(item))
-
 
 def test_linked_list():
     ll = LinkedList()
