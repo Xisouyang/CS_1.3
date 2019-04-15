@@ -109,10 +109,7 @@ class LinkedList(object):
         # TODO: Find the node before the given index and insert item after it
 
         if self.is_empty():
-            new_node = Node(item)
-            self.head = new_node
-            self.tail = new_node
-            self.size += 1
+            self.append(item)
         elif not self.is_empty() and index == 0:
             self.prepend(item)
         else:
