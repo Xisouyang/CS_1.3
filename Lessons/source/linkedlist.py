@@ -184,15 +184,14 @@ class LinkedList(object):
         """
         # TODO: Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
-        if old_item in self.items():
-            node = self.head
-            while node != None:
-                if node.data == old_item:
-                    node.data = new_item
-                else:
-                    node = node.next
-        else:
-            raise ValueError('Item not found: {}'.format(old_item))
+        node = self.head
+        while node != None:
+            if node.data == old_item:
+                node.data = new_item
+                return
+            else:
+                node = node.next
+        raise ValueError('Item not found: {}'.format(old_item))
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
