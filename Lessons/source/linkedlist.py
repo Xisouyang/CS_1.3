@@ -202,7 +202,7 @@ class LinkedList(object):
         Best case runtime: O(1) - item to delete is close to/at front of list
         Worst case runtime: O(n) - item to delete is close to/at end of list,
         need to traverse list to get to item
-        Worst case running time: ??? under what conditions? [TODO]"""
+        """
         # Start at the head node
         node = self.head
         # Keep track of the node before the one containing the given item
