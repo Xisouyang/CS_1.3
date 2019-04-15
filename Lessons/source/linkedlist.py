@@ -108,20 +108,20 @@ class LinkedList(object):
         # TODO: Find the node before the given index and insert item after it
 
         if self.is_empty():                         # if no items in linked list
-            self.append(item)                       # append
+            self.append(item)                       # append [O(1)]
         elif not self.is_empty() and index == 0:    # if items exist, and we want to add item to front
-            self.prepend(item)                      # add item to front
+            self.prepend(item)                      # add item to front [O(1)]
         else:
-            new_node = Node(item)                   # create new node with the new item
-            node = self.head                        # start at front of list
-            while index > 1 and node is not None:   # traverse through list
-                node = node.next                    # go to next node
-                index -= 1                          # keep track of where we are
-            new_node.next = node.next               # set pointer of new node so chain isn't broken thru insert
-            node.next = new_node                    # insert our new node
+            new_node = Node(item)                   # create new node with the new item [O(1)]
+            node = self.head                        # start at front of list [O(1)]
+            while index > 1 and node is not None:   # traverse through list [0(l) - l being length of list]
+                node = node.next                    # go to next node [O(1)]
+                index -= 1                          # keep track of where we are [O(1)]
+            new_node.next = node.next               # set pointer of new node so chain isn't broken thru insert [O(1)]
+            node.next = new_node                    # insert our new node [O(1)]
             if new_node.next == None:               # if our node is at the end
-                self.tail = new_node                # update our tail
-            self.size += 1                          # update list length
+                self.tail = new_node                # update our tail [O(1)]
+            self.size += 1                          # update list length [O(1)]
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
