@@ -81,6 +81,23 @@ class LinkedList(object):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node at the given index and return its data
 
+        result = ''
+
+        # index becomes your counter
+        # iterate through linked list, with counter decrement with each iteration
+        # once counter becomes 0 or out of range, check if we have some data
+        # if we find the data, we return that, otherwise return nil
+
+        node = self.head
+
+        while index > 0 and node is not None:
+
+            node = node.next
+            index -= 1
+
+        result = node.data
+        return result
+
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
@@ -171,7 +188,7 @@ class LinkedList(object):
                 # Skip to the next node
                 previous = node
                 node = node.next
-        self.size -= 1        
+        self.size -= 1
         # Check if we found the given item or we never did and reached the tail
         if found:
             # Check if we found a node in the middle of this linked list
