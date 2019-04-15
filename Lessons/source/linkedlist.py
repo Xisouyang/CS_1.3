@@ -184,13 +184,14 @@ class LinkedList(object):
         """
         # TODO: Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
-        node = self.head
-        while node != None:
-            if node.data == old_item:
-                node.data = new_item
+        
+        node = self.head                # start at front of list [O(1)]
+        while node != None:             # traverse thru list [O(l) - l is length of list]
+            if node.data == old_item:   # did we find item we wanna replace? [O(1)]
+                node.data = new_item    # if we did, replace it [O(1)]
                 return
             else:
-                node = node.next
+                node = node.next        # move on to next node [O(1)]
         raise ValueError('Item not found: {}'.format(old_item))
 
     def delete(self, item):
