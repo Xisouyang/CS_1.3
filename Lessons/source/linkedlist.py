@@ -178,7 +178,28 @@ class LinkedList(object):
 
     def reverse(self):
         """Reverse all the items in our linked list"""
-        pass    
+
+        if self.head == None or self.head.next == None:
+            return self.head
+
+        print("start: {}".format(self))
+
+        curr_node = self.head
+        self.tail = self.head
+        next_node = self.head.next
+        curr_node.next = None
+
+        while next_node != None:
+            tmp = next_node
+            next_node = next_node.next
+            tmp.next = self.head
+            self.head = tmp
+
+        print("finished: {}".format(self))
+        print("head: {}".format(self.head))
+        print("tail: {}".format(self.tail))
+
+
 
     def replace(self, old_item, new_item):
         """Replace the given old_item in this linked list with given new_item
@@ -300,6 +321,9 @@ def test_linked_list():
     print('size: {}'.format(ll.size))
     print('length: {}'.format(ll.length()))
     print(ll)
+
+    ll.insert_at_index(2, 'C')
+    ll.reverse()
 
 if __name__ == '__main__':
     test_linked_list()
