@@ -180,26 +180,25 @@ class LinkedList(object):
         """Reverse all the items in our linked list"""
 
         if self.head == None or self.head.next == None:
+            print("Can't reverse, one or no nodes in list")
             return self.head
 
-        print("start: {}".format(self))
+        print("original list: {}".format(self))
 
-        curr_node = self.head
-        self.tail = self.head
-        next_node = self.head.next
+        curr_node = self.head           # Keep track of where we are in list
+        self.tail = self.head           # Keep track of where last node will be in reversed list
+        next_node = self.head.next      # Keep track of element in front of us in list
         curr_node.next = None
 
-        while next_node != None:
-            tmp = next_node
-            next_node = next_node.next
-            tmp.next = self.head
-            self.head = tmp
+        while next_node != None:        # Iterate through list
+            tmp = next_node             # track current node
+            next_node = next_node.next  # track the next node
+            tmp.next = self.head        # connect to previous node to keep list connected
+            self.head = tmp             # reset head to front
 
-        print("finished: {}".format(self))
+        print("reversed list: {}".format(self))
         print("head: {}".format(self.head))
         print("tail: {}".format(self.tail))
-
-
 
     def replace(self, old_item, new_item):
         """Replace the given old_item in this linked list with given new_item
@@ -323,6 +322,7 @@ def test_linked_list():
     print(ll)
 
     ll.insert_at_index(2, 'C')
+    ll.insert_at_index(3, 'F')
     ll.reverse()
 
 if __name__ == '__main__':
