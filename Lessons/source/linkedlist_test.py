@@ -165,7 +165,7 @@ class LinkedListTest(unittest.TestCase):
         ll.reverse()
         assert ll.head.data == 'C'
         assert ll.tail.data == 'A'
-        assert ll.size == 3        
+        assert ll.size == 3
 
     def test_delete(self):
         ll = LinkedList(['A', 'B', 'C'])
@@ -184,6 +184,12 @@ class LinkedListTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             ll.delete('X')  # item not in list
 
+    def test_reverse(self):
+        ll = LinkedList(['A', 'B', 'C'])
+        ll.reverse()
+        assert ll.size == 3
+        assert ll.head.data == 'C'
+        assert ll.tail.data == 'A'
 
 if __name__ == '__main__':
     unittest.main()
