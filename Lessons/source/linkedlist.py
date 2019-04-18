@@ -1,5 +1,81 @@
 #!python
 
+class BinaryNode(object):
+
+    def __init__(self, data):
+
+        self.data = data
+        self.next = None
+        self.prev = None
+
+class DoublyLinkedList(object):
+
+    def __init__(self, iterable=None):
+
+        self.head = None
+        self.tail = None
+        self.size = 0
+
+        if iterable != None:
+            for item in iterable:
+                self.append(item)
+
+    def items(self):
+        """Return a list of all items in this linked list."""
+
+        pass
+
+    def is_empty(self):
+        """Return True if this linked list is empty, or False."""
+
+        pass
+
+    def length(self):
+        """Return the length of this linked list by traversing its nodes."""
+
+        pass
+
+    def get_at_index(self):
+        """Return an item from this linked list satisfying the given quality."""
+
+        pass
+
+    def insert_at_index(self):
+        """Insert the given item at the given index in this linked list, or
+        raise ValueError if the given index is out of range of the list size."""
+        pass
+
+    def append(self):
+        """Insert the given item at the tail of this linked list."""
+
+        pass
+
+    def prepend(self):
+        """Insert the given item at the head of this linked list."""
+
+        pass
+
+    def find(self):
+        """Return an item from this linked list satisfying the given quality."""
+
+        pass
+
+    def replace(self):
+        """Replace the given old_item in this linked list with given new_item
+        using the same node, or raise ValueError if old_item is not found."""
+
+        pass
+
+    def reverse(self):
+        """Reverse all the items in our linked list"""
+
+        pass
+
+    def delete(self):
+        """Delete the given item from this linked list, or raise ValueError."""
+
+        pass
+
 class Node(object):
 
     def __init__(self, data):
