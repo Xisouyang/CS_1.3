@@ -45,10 +45,15 @@ class DoublyLinkedList(object):
         raise ValueError if the given index is out of range of the list size."""
         pass
 
-    def append(self):
+    def append(self, item):
         """Insert the given item at the tail of this linked list."""
-
-        pass
+        new_node = BinaryNode(item)
+        if self.head == None:
+            self.head = new_node
+        else:
+            self.tail.next = new_node
+        self.tail = new_node
+        self.size += 1
 
     def prepend(self):
         """Insert the given item at the head of this linked list."""
@@ -401,5 +406,9 @@ def test_linked_list():
     ll.insert_at_index(3, 'F')
     ll.reverse()
 
+def test_doubly_linked_list():
+    dll = DoublyLinkedList()
+
 if __name__ == '__main__':
     test_linked_list()
+    # test_doubly_linked_list()
