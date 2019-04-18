@@ -1,8 +1,32 @@
 #!python
 
-from linkedlist import LinkedList, Node
+from linkedlist import LinkedList, Node, DoublyLinkedList, BinaryNode
 import unittest
 
+
+class BinaryNodeTest(unittest.TestCase):
+
+    def test_init(self):
+        data = 'BCD'
+        node = BinaryNode(data)
+        assert node.data is data
+        assert node.next is None
+
+class DoublyLinkedListTest(unittest.TestCase):
+
+    def test_init(self):
+
+        dll = DoublyLinkedList()
+        assert dll.head is None
+        assert dll.tail is None
+        assert dll.size == 0
+
+    def test_init_with_list(self):
+
+        dll = DoublyLinkedList(['B', 'C', 'D'])
+        assert dll.head.data == 'B'
+        assert dll.tail.data == 'D'
+        assert dll.size == 3
 
 class NodeTest(unittest.TestCase):
 
