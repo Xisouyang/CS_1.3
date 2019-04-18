@@ -22,18 +22,23 @@ class DoublyLinkedList(object):
 
     def items(self):
         """Return a list of all items in this linked list."""
+        item_list = []
+        curr = self.head
 
-        pass
+        while curr != None:
+            item_list.append(curr.data)
+            curr = curr.next
+        return item_list
 
     def is_empty(self):
         """Return True if this linked list is empty, or False."""
-
-        pass
+        if self.head == None:
+            return True
+        return False
 
     def length(self):
         """Return the length of this linked list by traversing its nodes."""
-
-        pass
+        return self.size
 
     def get_at_index(self):
         """Return an item from this linked list satisfying the given quality."""
