@@ -28,6 +28,40 @@ class DoublyLinkedListTest(unittest.TestCase):
         assert dll.tail.data == 'D'
         assert dll.size == 3
 
+    def test_append(self):
+
+        dll = DoublyLinkedList()
+        dll.append('A')
+        assert dll.head.data == 'A'
+        assert dll.tail.data == 'A'
+        assert dll.size == 1
+
+        dll.append('B')
+        assert dll.head.data == 'A'
+        assert dll.tail.data == 'B'
+        assert dll.size == 2
+
+        dll.append('C')
+        assert dll.head.data == 'A'
+        assert dll.tail.data == 'C'
+        assert dll.size == 3
+
+    def test_items(self):
+        dll = DoublyLinkedList()
+        assert dll.items() == []
+        dll.append('A')
+        assert dll.items() == ['A']
+        dll.append('B')
+        assert dll.items() == ['A', 'B']
+
+    def test_length(self):
+        dll = DoublyLinkedList()
+        assert dll.length() == 0
+        dll.append('A')
+        assert dll.length() == 1
+        dll.append('B')
+        assert dll.length() == 2  
+
 class NodeTest(unittest.TestCase):
 
     def test_init(self):
