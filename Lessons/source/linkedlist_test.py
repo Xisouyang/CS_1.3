@@ -28,6 +28,71 @@ class DoublyLinkedListTest(unittest.TestCase):
         assert dll.tail.data == 'D'
         assert dll.size == 3
 
+    def test_items(self):
+
+        dll = DoublyLinkedList()
+        assert dll.items() == []
+        dll.append('A')
+        assert dll.items() == ['A']
+        dll.append('B')
+        assert dll.items() == ['A', 'B']
+
+    def test_length(self):
+
+        dll = DoublyLinkedList()
+        assert dll.length() == 0
+        dll.append('A')
+        assert dll.length() == 1
+        dll.append('B')
+        assert dll.length() == 2
+
+    def test_get_at_index(self):
+        dll = DoublyLinkedList(['A', 'B', 'C'])
+        assert dll.get_at_index(0) == 'A'
+        assert dll.get_at_index(1) == 'B'
+        assert dll.get_at_index(2) == 'C'
+
+    def test_insert_at_index(self):
+        dll = DoublyLinkedList()
+
+        dll.insert_at_index(0, 'S')
+        assert dll.get_at_index(0) == 'S'
+        assert dll.head.data == 'S'
+        assert dll.tail.data == 'S'
+        assert dll.size == 1
+
+        dll.insert_at_index(1, 'O')
+        assert dll.get_at_index(1) == 'O'
+        assert dll.head.data == 'S'
+        assert dll.tail.data == 'O'
+        assert dll.size == 2
+
+        dll.insert_at_index(1, 'X')
+        assert dll.get_at_index(1) == 'X'
+        assert dll.head.data == 'S'
+        assert dll.tail.data == 'O'
+        assert dll.size == 3
+
+        dll.insert_at_index(3, 'SSS')
+        assert dll.get_at_index(3) == 'SSS'
+        assert dll.head.data == 'S'
+        assert dll.tail.data == 'SSS'
+        assert dll.size == 4
+
+    def test_prepend(self):
+
+        dll = DoublyLinkedList()
+
+        dll.prepend('A')
+        assert dll.head.data == 'A'
+        assert dll.tail.data == 'A'
+        assert dll.size == 1
+
+        dll.prepend('B')
+        assert dll.head.data == 'B'
+        assert dll.tail.data == 'A'
+        assert dll.size == 2
+
     def test_append(self):
 
         dll = DoublyLinkedList()
@@ -46,21 +111,10 @@ class DoublyLinkedListTest(unittest.TestCase):
         assert dll.tail.data == 'C'
         assert dll.size == 3
 
-    def test_items(self):
-        dll = DoublyLinkedList()
-        assert dll.items() == []
-        dll.append('A')
-        assert dll.items() == ['A']
-        dll.append('B')
-        assert dll.items() == ['A', 'B']
 
-    def test_length(self):
-        dll = DoublyLinkedList()
-        assert dll.length() == 0
-        dll.append('A')
-        assert dll.length() == 1
-        dll.append('B')
-        assert dll.length() == 2  
+
+
+
 
 class NodeTest(unittest.TestCase):
 
