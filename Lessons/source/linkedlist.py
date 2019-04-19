@@ -40,15 +40,47 @@ class DoublyLinkedList(object):
         """Return the length of this linked list by traversing its nodes."""
         return self.size
 
-    def get_at_index(self):
-        """Return an item from this linked list satisfying the given quality."""
+    def get_at_index(self, index):
+        """Return the item at the given index in this linked list, or
+        raise ValueError if the given index is out of range of the list size."""
 
-        pass
+        if index < 0 or index > self.size:
+            raise ValueError("index out of range: {}".format(index))
 
-    def insert_at_index(self):
+        curr_node = self.head
+        while curr_node != None:
+            if index == 0:
+                return curr_node.data
+            curr_node.prev = curr_node
+            curr_node = curr_node.next
+            index -= 1
+
+
+    def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size."""
-        pass
+        if index < 0 or index > self.size:
+            raise ValueError("index out of range: {}".format(index))
+
+        if index == self.size:
+            self.append(item)
+            return
+        if index == 0:
+            self.prepend(item)
+            return
+
+        new_node = BinaryNode(item)
+        curr_node = self.head
+
+        while curr_node != None and index > 1:
+
+            curr_node.prev = curr_node
+            curr_node = curr_node.next
+            index -= 1
+
+        new_node.next = curr_node.next
+        curr_node.next = new_node
+        self.size += 1
 
     def append(self, item):
         """Insert the given item at the tail of this linked list."""
@@ -60,10 +92,19 @@ class DoublyLinkedList(object):
         self.tail = new_node
         self.size += 1
 
-    def prepend(self):
+    def prepend(self, item):
         """Insert the given item at the head of this linked list."""
 
-        pass
+        new_node = BinaryNode(item)
+
+        if self.head == None:
+            self.head = new_node
+            self.tail = new_node
+            self.size += 1
+        else:
+            new_node.next = self.head
+            self.head = new_node
+            self.size += 1
 
     def find(self):
         """Return an item from this linked list satisfying the given quality."""
@@ -196,9 +237,9 @@ class LinkedList(object):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node before the given index and insert item after it
 
-        if self.is_empty() or index == self.size:   # if no items in linked list
+        if index == self.size:   # if no items in linked list
             self.append(item)                       # append [O(1)]
-        elif not self.is_empty() and index == 0:    # if items exist, and we want to add item to front
+        elif index == 0:         # if items exist, and we want to add item to front
             self.prepend(item)                      # add item to front [O(1)]
         else:
             new_node = Node(item)                   # create new node with the new item [O(1)]
