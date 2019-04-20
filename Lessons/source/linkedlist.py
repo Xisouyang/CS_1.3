@@ -106,21 +106,41 @@ class DoublyLinkedList(object):
             self.head = new_node
             self.size += 1
 
-    def find(self):
+    def find(self, quality):
         """Return an item from this linked list satisfying the given quality."""
 
-        pass
+        if self.is_empty():
+            return
 
-    def replace(self):
+        curr_node = self.head
+        while curr_node != None:
+            if quality(curr_node.data):
+                return curr_node.data
+            curr_node.prev = curr_node
+            curr_node = curr_node.next
+        return None
+
+    def replace(self, old_item, new_item):
         """Replace the given old_item in this linked list with given new_item
         using the same node, or raise ValueError if old_item is not found."""
 
-        pass
+        curr_node = self.head
+        while curr_node != None:
+            if curr_node.data == old_item:
+                curr_node.data = new_item
+                return
+            curr_node.prev = curr_node
+            curr_node = curr_node.next
+
+        raise ValueError("old_item not found")
 
     def reverse(self):
         """Reverse all the items in our linked list"""
 
-        pass
+        if self.is_empty():
+            raise ValueError("Empty doubly linked list: {}".format(self))
+
+        
 
     def delete(self):
         """Delete the given item from this linked list, or raise ValueError."""
@@ -312,16 +332,16 @@ class LinkedList(object):
 
         print("original list: {}".format(self))
 
-        curr_node = self.head           # Keep track of where we are in list
-        self.tail = self.head           # Keep track of where last node will be in reversed list
-        next_node = self.head.next      # Keep track of element in front of us in list
-        curr_node.next = None
+        self.tail = self.head           # track end of reversed list
+        curr_node = self.head           # set starting point
+        prev_node = None
 
-        while next_node != None:        # Iterate through list
-            tmp = next_node             # track current node
-            next_node = next_node.next  # track the next node
-            tmp.next = self.head        # connect to previous node to keep list connected
-            self.head = tmp             # reset head to front
+        while curr_node != None:
+            next_node = curr_node.next  # track next node in list
+            curr_node.next = prev_node  # doing the reversing on the pointers
+            prev_node = curr_node       # move up one node for prev
+            curr_node = next_node       # move up one node for curr
+        self.head = prev_node           # reset where the head is in list
 
         print("reversed list: {}".format(self))
         print("head: {}".format(self.head))
