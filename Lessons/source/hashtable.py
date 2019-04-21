@@ -28,6 +28,7 @@ class HashTable(object):
         Best and worst case running time: ??? under what conditions? [TODO]"""
         # TODO: Calculate load factor
         # return ...
+        return self.length() / len(self.buckets)
 
     def keys(self):
         """Return a list of all keys in this hash table.
@@ -114,12 +115,15 @@ class HashTable(object):
             self.size -= 1
         # Insert the new key-value entry into the bucket in either case
         bucket.append((key, value))
+        self.size += 1
+
         # TODO: Check if the load factor exceeds a threshold such as 0.75
+        if self.load_factor() > 0.75:
+            self._resize()
         # ...
         # TODO: If so, automatically resize to reduce the load factor
         # ...
 
-        self.size += 1
 
     def delete(self, key):
         """Delete the given key and its associated value, or raise KeyError.
@@ -133,6 +137,7 @@ class HashTable(object):
         if entry is not None:  # Found
             # Remove the key-value entry from the bucket
             bucket.delete(entry)
+            self.size -= 1
         else:  # Not found
             raise KeyError('Key not found: {}'.format(key))
 
@@ -148,14 +153,26 @@ class HashTable(object):
         # Option to reduce size if buckets are sparsely filled (low load factor)
         elif new_size is 0:
             new_size = len(self.buckets) / 2  # Half size
+
+        # how do I get all key-value entries? tuple? TUPLE. can access using self.items()
+        # I have access to all the keys and all the values
+        # what list do I store them in? linked list or arrays? array
+
         # TODO: Get a list to temporarily hold all current key-value entries
-        # ...
+        tmp_list = self.items()
+
         # TODO: Create a new list of new_size total empty linked list buckets
-        # ...
+        self.size = 0
+        new_bucket_list = []
+
+        for i in range(new_size):
+            new_bucket_list.append(LinkedList())
+        self.buckets = new_bucket_list
+
         # TODO: Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
-        # ...
-
+        for key, value in tmp_list:
+            self.set(key, value)
 
 def test_hash_table():
     ht = HashTable(4)
