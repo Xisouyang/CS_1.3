@@ -32,7 +32,13 @@ class Set(object):
 
     def union(self, other_set):
         # return a new set that is the union of this set and other_set
-        pass
+        tmp_hash = HashTable()
+        for item in self.hash_set.keys():
+            tmp_hash.set(item, None)
+        for item in other_set.hash_set.keys():
+            tmp_hash.set(item, None)
+        self.hash_set = tmp_hash
+        return self
 
     def intersection(self, other_set):
         # return a new set that is the intersection of this set and other_set
