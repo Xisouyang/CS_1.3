@@ -57,7 +57,31 @@ class SetsTest(unittest.TestCase):
         union_set = set_one.union(set_two)
         self.assertCountEqual(union_set.hash_set.keys(), ['A', 'B', 'C', 'X', 'Y'])
 
-        set_three = Set(['D', 'F', 'G'])
-        set_four = Set(['F', 'G', 'H'])
-        union_set = set_three.union(set_four)
-        self.assertCountEqual(union_set.hash_set.keys(), ['D', 'F', 'G', 'H'])
+        set_one = Set(['A', 'A', 'B', 'C'])
+        set_two = Set(['X', 'Y', 'X'])
+        union_set = set_one.union(set_two)
+        assert (union_set.hash_set.size == 7) == False
+
+    def test_intersection(self):
+
+        set_one = Set(['A', 'B', 'C'])
+        set_two = Set(['A', 'C', 'D'])
+        intersection_set = set_one.intersection(set_two)
+        self.assertCountEqual(intersection_set.hash_set.keys(), ['A', 'C'])
+
+    def test_is_subset(self):
+
+        set_one = Set(['A', 'B', 'C'])
+        set_two = Set(['A', 'B'])
+        is_a_subset = set_one.is_subset(set_two)
+        assert is_a_subset == True
+
+        set_one = Set(['A', 'B', 'C', 'D'])
+        set_two = Set(['A', 'B', 'C', 'D', 'E'])
+        is_a_subset = set_one.is_subset(set_two)
+        assert is_a_subset == False
+
+        set_one = Set(['A', 'B', 'C'])
+        set_two = Set(['A', 'D'])
+        is_a_subset = set_one.is_subset(set_two)
+        assert is_a_subset == False
