@@ -85,3 +85,15 @@ class SetsTest(unittest.TestCase):
         set_two = Set(['A', 'D'])
         is_a_subset = set_one.is_subset(set_two)
         assert is_a_subset == False
+
+    def test_difference(self):
+        
+        set_one = Set(['A', 'B', 'C', 'D'])
+        set_two = Set(['A', 'B', 'C', 'D', 'E'])
+        new_set = set_one.difference(set_two)
+        self.assertCountEqual(new_set.hash_set.keys(), [])
+
+        set_one = Set(['A', 'B', 'C'])
+        set_two = Set(['B', 'C', 'D'])
+        new_set = set_one.difference(set_two)
+        self.assertCountEqual(new_set.hash_set.keys(), ['A'])
