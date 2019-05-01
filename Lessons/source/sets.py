@@ -24,7 +24,7 @@ class Set(object):
     def add(self, element):
         # add element to this set, if not present already
         if self.contains(element) == False:
-            self.hash_set.set(element, value=None)
+            self.hash_set.set(element, None)
 
     def remove(self, element):
         # remove element from this set, if present, or else raise KeyError
@@ -32,17 +32,27 @@ class Set(object):
 
     def union(self, other_set):
         # return a new set that is the union of this set and other_set
-        tmp_hash = HashTable()
+        new_set = Set()
         for item in self.hash_set.keys():
-            tmp_hash.set(item, None)
+            new_set.add(item)
         for item in other_set.hash_set.keys():
-            tmp_hash.set(item, None)
-        self.hash_set = tmp_hash
-        return self
+            new_set.add(item)
+        return new_set
 
     def intersection(self, other_set):
         # return a new set that is the intersection of this set and other_set
-        pass
+        new_set = Set()
+        if other_set.size() > self.size():
+            big_set = other_set
+            small_set = self
+        else:
+            big_set = self
+            small_set = other_set
+
+        for item in small_set.hash_set.keys():
+            if big_set.contains(item):
+                new_set.add(item)
+        return new_set
 
     def difference(self, other_set):
         # return a new set that is the difference of this set and other_set
@@ -50,4 +60,11 @@ class Set(object):
 
     def is_subset(self, other_set):
         # return a boolean indicating whether other_set is a subset of this set
-        pass
+        if other_set.size() > self.size():
+            return False
+
+        is_a_subset = True
+        for item in other_set.hash_set.keys():
+            if item not in self.hash_set.keys():
+                is_a_subset = False
+        return is_a_subset
