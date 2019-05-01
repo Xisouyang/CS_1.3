@@ -87,13 +87,43 @@ class SetsTest(unittest.TestCase):
         assert is_a_subset == False
 
     def test_difference(self):
-        
+
         set_one = Set(['A', 'B', 'C', 'D'])
         set_two = Set(['A', 'B', 'C', 'D', 'E'])
         new_set = set_one.difference(set_two)
         self.assertCountEqual(new_set.hash_set.keys(), [])
 
+        set_one = Set(['A', 'B', 'C', 'D'])
+        set_two = Set(['A', 'B', 'C', 'D', 'E'])
+        new_set = set_two.difference(set_one)
+        self.assertCountEqual(new_set.hash_set.keys(), ['E'])
+
         set_one = Set(['A', 'B', 'C'])
         set_two = Set(['B', 'C', 'D'])
         new_set = set_one.difference(set_two)
         self.assertCountEqual(new_set.hash_set.keys(), ['A'])
+
+        set_one = Set(['A', 'B', 'C'])
+        set_two = Set(['D', 'E', 'F'])
+        new_set = set_one.difference(set_two)
+        self.assertCountEqual(new_set.hash_set.keys(), ['A', 'B', 'C'])
+
+        set_one = Set(['A', 'B', 'C'])
+        set_two = Set()
+        new_set = set_one.difference(set_two)
+        self.assertCountEqual(new_set.hash_set.keys(), ['A', 'B', 'C'])
+
+        set_one = Set()
+        set_two = Set()
+        new_set = set_one.difference(set_two)
+        self.assertCountEqual(new_set.hash_set.keys(), [])
+
+        set_one = Set(['A', 'B', None])
+        set_two = Set(['B', 'C', 'D'])
+        new_set = set_one.difference(set_two)
+        self.assertCountEqual(new_set.hash_set.keys(), ['A', None])
+
+        set_one = Set(['A', 'B', 'B', 'B', 'C'])
+        set_two = Set(['C', 'D'])
+        new_set = set_one.difference(set_two)
+        self.assertCountEqual(new_set.hash_set.keys(), ['A', 'B'])
