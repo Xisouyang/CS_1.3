@@ -58,7 +58,7 @@ class Set(object):
         # return a new set that is the difference of this set and other_set
         new_set = Set()
         for item in self.hash_set.keys():
-            if item in other_set.hash_set.keys():
+            if other_set.contains(item):
                 continue
             new_set.add(item)
         return new_set
@@ -70,6 +70,6 @@ class Set(object):
 
         is_a_subset = True
         for item in other_set.hash_set.keys():
-            if item not in self.hash_set.keys():
+            if not self.contains(item):
                 is_a_subset = False
         return is_a_subset
